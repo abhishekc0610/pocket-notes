@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // components
 import Notes from "./components/WriteNotes/Notes";
@@ -33,14 +33,13 @@ function App() {
 
     setGroupSelected(groupInfo.name);
     setCreateCardSelected(false);
-    // console.log(allGroups);
   };
 
-  const addNoteToGroup = (newNote) => {
+  const addNoteToGroup = (allNotes) => {
     const newObj = {
       name: allGroups[groupSelected].name,
       color: allGroups[groupSelected].color,
-      content: newNote,
+      content: allNotes,
     };
     setAllgroups((prevVal) => {
       return {

@@ -5,7 +5,7 @@ import "./Notes.css";
 
 // images
 import bgIimg from "../../assets/writeNotes/bg-img.png";
-import senButton from "../../assets/writeNotes/sendButton.png";
+import sendButton from "../../assets/writeNotes/sendButton.png";
 
 function Notes({ allGroups, addNoteToGroup, groupSelected }) {
   const [allNotes, setAllNotes] = useState([]);
@@ -75,16 +75,22 @@ function Notes({ allGroups, addNoteToGroup, groupSelected }) {
     });
   }, [noteContent.para]);
 
+  useEffect(() => {
+    if (allNotes.length > 0) {
+      addNoteToGroup(allNotes);
+    }
+  }, [allNotes]);
+
   const handleClick = () => {
     setAllNotes((prevVal) => {
       return [...prevVal, noteContent];
     });
+
     setNoteContent({
       time: "",
       date: "",
       para: "",
     });
-    addNoteToGroup(allNotes);
   };
 
   return (
@@ -141,7 +147,7 @@ function Notes({ allGroups, addNoteToGroup, groupSelected }) {
               value={noteContent.para}
             ></textarea>
             <div onClick={handleClick} className="send-button">
-              <img src={senButton} alt="" />
+              <img src={sendButton} alt="" />
             </div>
           </div>
         </div>
