@@ -51,7 +51,9 @@
     overflow-y: scroll;
 }
 
-::-webkit-scrollbar {display:none;}
+::-webkit-scrollbar {
+    display: none;
+}
 
 .group-acc {
     display: flex;

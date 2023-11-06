@@ -3,7 +3,9 @@ import React from "react";
 //styles
 import "./NotesGroup.css";
 
-function NotesGroup({ onSelectCard, allGroups }) {
+function NotesGroup({ onSelectCard, allGroups, setGroupSelected }) {
+  const allNames = Object.keys(allGroups);
+
   return (
     <div className="group-main">
       <h1>Pocket Notes</h1>
@@ -16,8 +18,8 @@ function NotesGroup({ onSelectCard, allGroups }) {
         </div>
 
         <div className="groups-acc-container">
-          {allGroups.map((item) => {
-            const x = item.name.split(" ").join("");
+          {allNames.map((item) => {
+            const x = allGroups[item].name.split(" ").join("");
             const initials = (x[0] + x[1]).toUpperCase();
             return (
               <div className="group-acc">
@@ -32,7 +34,7 @@ function NotesGroup({ onSelectCard, allGroups }) {
                     cx="34.4503"
                     cy="34.4503"
                     r="33.5"
-                    fill={item.color}
+                    fill={allGroups[item].color}
                   />
                   <text
                     fontSize="1.5rem"
@@ -46,7 +48,14 @@ function NotesGroup({ onSelectCard, allGroups }) {
                     {initials}
                   </text>
                 </svg>
-                <div className="group-acc-title">{item.name}</div>
+                <div
+                  className="group-acc-title"
+                  onClick={() => {
+                    setGroupSelected(allGroups[item].name);
+                  }}
+                >
+                  {allGroups[item].name}
+                </div>
               </div>
             );
           })}
