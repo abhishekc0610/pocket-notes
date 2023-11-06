@@ -31,7 +31,7 @@ function NotesGroup({ onSelectCard, allGroups }) {
                   <circle
                     cx="34.4503"
                     cy="34.4503"
-                    r="34.5"
+                    r="33.5"
                     fill={item.color}
                   />
                   <text

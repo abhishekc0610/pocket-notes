@@ -86,15 +86,53 @@
     width: 100%;
     height: 60vh;
     background-color: #F7ECDC;
+    overflow-y: scroll;
+}
+
+.completed-note {
+    width: 100%;
+    padding: 2rem 4.5rem 0.5rem 5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-time {
+    width: 15%;
+}
+
+.note-para {
+    width: 82%;
+}
+
+.date-time p,
+.note-para p {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 140%;
+    letter-spacing: 0.05rem;
 }
 
 .write-note {
+    position: relative;
     width: 100%;
     height: 30vh;
     background-color: #E8E8E8;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.send-button {
+    height: 1.5rem;
+    width: 1.7rem;
+    position: absolute;
+    bottom: 2.5rem;
+    right: 3rem;
+}
+
+.send-button img {
+    width: 100%;
+    height: 100%;
 }
 
 .write-note textarea {

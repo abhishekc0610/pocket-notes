@@ -1,12 +1,72 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 //styles
 import "./Notes.css";
 
 // images
 import bgIimg from "../../assets/writeNotes/bg-img.png";
+import senButton from "../../assets/writeNotes/sendButton.png"
 
 function Notes() {
+
+  const [allNotes, setAllNotes] = useState([])
+
+  const [noteContent, setNoteContent] = useState({
+    time: "",
+    date: "",
+    content: "",
+  });
+
+  const handleChange = (e) => {
+    setNoteContent((prevVal) => {
+      return {
+        ...prevVal,
+        content: e.target.value
+      };
+    });
+  };
+
+  useEffect(() => {
+    // TIME
+    const currDate = new Date();
+    let hour = currDate.getHours();
+    let min = currDate.getMinutes();
+    let timeZone = hour < 12 ? "AM" : "PM";
+    hour = hour % 12;
+    if (hour === 0 && timeZone === "PM") {
+      hour = 12;
+    }
+    hour = hour < 10 ? `0${hour}` : hour;
+    min = min < 10 ? `0${min}` : min;
+    const timeFormat = `${hour}:${min} ${timeZone}`;
+
+    // DATE
+    const monthNames = [
+      'January', 'February', 'March', 'April',
+      'May', 'June', 'July', 'August',
+      'September', 'October', 'November', 'December'
+    ];
+    let dt = currDate.getDate();
+    let month = currDate.getMonth(); // month-> 0 to 11
+    let year = currDate.getFullYear();
+    const dateFormat = `${dt} ${monthNames[month]} ${year}`;
+
+    // SET DATE AND TIME
+    setNoteContent((prevVal) => {
+      return {
+        ...prevVal,
+        time: `${timeFormat}`,
+        date : `${dateFormat}`
+      };
+    });
+  }, [noteContent.content])
+
+  const handleClick = () => {
+    setAllNotes((prevVal) => {
+      return [...prevVal, noteContent]
+    })
+  }
+
   return (
     <div className="write-notes-main">
       <div className="notes-header">
@@ -17,7 +77,7 @@ function Notes() {
           viewBox="0 0 69 69"
           fill="none"
         >
-          <circle cx="34.4503" cy="34.4503" r="34.5" fill={"blue"} />
+          <circle cx="34.4503" cy="34.4503" r="33.5" fill={"blue"} />
           <text
             fontSize="1.5rem"
             x="50%"
@@ -32,9 +92,31 @@ function Notes() {
         </svg>
         <h1>Cuvette Notes</h1>
       </div>
-      <div className="notes-body"></div>
+      <div className="notes-body">
+
+        {allNotes.map((item) => {
+          return (
+            <div className="completed-note">
+          <div className="date-time">
+            <p>{item.time}</p>
+            <p>{item.date}</p>
+          </div>
+          <div className="note-para">
+            <p>{item.content}</p>
+          </div>
+        </div>
+          )
+        })}
+      </div>
       <div className="write-note">
-        <textarea placeholder="Enter your text here..........."></textarea>
+        <textarea
+          placeholder="Enter your text here..........."
+          onChange={handleChange}
+        >
+        </textarea>
+        <div onClick={handleClick} className="send-button">
+          <img src={senButton} alt="" />
+        </div>
       </div>
     </div>
 
