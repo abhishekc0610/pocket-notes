@@ -18,7 +18,6 @@
 .right-container {
   height: 100vh;
   width: 75vw;
-  background-color: #F7ECDC;
 }
 
 @media (prefers-reduced-motion: no-preference) {
